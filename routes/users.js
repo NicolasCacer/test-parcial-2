@@ -34,6 +34,10 @@ const listaNom= [
     "AZCONA, ANDRÉS"
   ];
 
+  router.get("/", (req,res) =>{
+    res.send(listaNom);
+  });
+
 
 
   router.get("/:count", (req,res) => {
@@ -43,13 +47,13 @@ const listaNom= [
     }
     let sort=req.query.sort.toUpperCase;
     let listaNomOrdenada=listaNom
-    if (sort =="" || sort==null){
+    if (sort ==="" || sort===null){
         sort="ASC";
     }
-    if (sort=="ASC"){
+    if (sort==="ASC"){
         listaNomOrdenada=listaNom.sort().reverse();
     }
-    else if (sort=="DESC"){
+    else if (sort==="DESC"){
         listanombreOrdenada=listaNom.sort();
     } else {
         return res.status(400).send('No es valido ese parametro para ordenar.')
@@ -57,7 +61,7 @@ const listaNom= [
 
     listanombreOrdenada=listanombreOrdenada.slice(0,numero);
 
-    res.send(listanombreOrdenada)
+    res.send(listanombreOrdenada);
   });
   
   module.exports = router;
