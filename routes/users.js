@@ -59,7 +59,7 @@ const listaNom= [
         return res.status(400).send('No es valido ese parametro para ordenar.')
     }
 
-    listanombreOrdenada=listanombreOrdenada.slice(0,numero);
+    listanombreOrdenada=listanombreOrdenada.slice(0,count);
 
     res.send(listanombreOrdenada);
   });
