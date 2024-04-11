@@ -62,7 +62,6 @@ const listaNom= [
     listanombreOrdenada=listanombreOrdenada.slice(0,numero);
 
     res.send(listanombreOrdenada)
-
-    
-
   });
+  
+  module.exports = router;
