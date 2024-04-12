@@ -1,6 +1,10 @@
 const express=require ("express");
 
+
 const router =express.Router();
+
+router.use(express.urlencoded({ extended: true })); // para acceder al body
+router.use(express.json());
 
 const listaNom= [
     "ACERO GARCIA, SAMUEL",
