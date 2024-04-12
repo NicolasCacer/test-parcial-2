@@ -35,11 +35,32 @@ const listaNom= [
   ];
 
   router.get("/", (req,res) =>{
-    res.send(listaNom);
+    const { nombre, apellido, correo } = req.body;
+
+    // Validar que se proporcionen los parámetros obligatorios
+    if (!nombre || !apellido || !correo) {
+      return res.status(400).json({ error: "Faltan parámetros obligatorios: nombre, apellido, correo electrónico" });
+    }
+  
+    // Establecer valores por defecto para ciudad y país si no se proporcionan
+    const ciudad = req.body.ciudad || "Bogotá";
+    const pais = req.body.pais || "Colombia";
+  
+    // Crear objeto de usuario con los datos proporcionados
+    const usuario = {
+      nombre,
+      apellido,
+      correo,
+      ciudad,
+      pais
+    };
+  
+    // Retornar el objeto JSON con la información del usuario creado
+    res.status(201).json(usuario);
   });
 
   router.get("/:count", (req, res) => {
-    const count = parseInt(req.params.count);
+    const count = parseInt(req.params.count) ||listaNom.length;
     let sort = req.query.sort ? req.query.sort.toUpperCase() : 'ASC';
     let listaNomOrdenada = listaNom;
     if (count>30){
