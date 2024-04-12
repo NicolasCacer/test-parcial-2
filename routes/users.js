@@ -35,7 +35,9 @@ const listaNom= [
   ];
 
   router.post("/", (req,res) =>{
-    const { name, lastName, email } = req.body;
+    const name=req.body.name;
+    const lastName=req.body.lastName;
+    const email=req.body.email;
 
     // Validar que se proporcionen los parámetros obligatorios
     if (!name || !lastName || !email) {
