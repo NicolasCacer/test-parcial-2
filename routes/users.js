@@ -38,24 +38,28 @@ const listaNom= [
     res.send(listaNom);
   });
 
-
-
-  router.get("/:count", (req,res) => {
-    const count=parseInt(req.params.count);
-    let sort = req.params.sort ? req.params.sort.toUpperCase() : 'ASC';
-    let listaNomOrdenada=listaNom
-    if (sort==="ASC"){
-        listaNomOrdenada.sort().reverse()
+  router.get("/:count", (req, res) => {
+    const count = parseInt(req.params.count);
+    let sort = req.query.sort ? req.query.sort.toUpperCase() : 'ASC';
+    let listaNomOrdenada = listaNom.slice(); // Copia la lista original para no modificarla
+  
+    // Validar el parámetro de ordenamiento
+    if (sort !== 'ASC' && sort !== 'DESC') {
+      return res.status(400).send('El parámetro de ordenamiento debe ser "ASC" o "DESC".');
     }
-    if (sort==="DESC"){
-        listanombreOrdenada.reverse();
+  
+    // Ordenar la lista de nombres
+    listaNomOrdenada.sort();
+  
+    // Si el ordenamiento es DESC, revertir la lista
+    if (sort === 'DESC') {
+      listaNomOrdenada.reverse();
     }
-    if (sort!=="ASC" || sort!=="DESC"){
-        return res.status(400).send('No es valido ese parametro para ordenar.')
-    }      
-    listanombreOrdenada=listanombreOrdenada.slice(0,count);
-
-    res.send(listanombreOrdenada);
-  });
+  
+    // Obtener las primeras "count" entradas del arreglo
+    listaNomOrdenada = listaNomOrdenada.slice(0, count);
+  
+    res.send(listaNomOrdenada);
+  });  
   
   module.exports = router;
