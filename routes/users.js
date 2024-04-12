@@ -41,11 +41,14 @@ const listaNom= [
   router.get("/:count", (req, res) => {
     const count = parseInt(req.params.count);
     let sort = req.query.sort ? req.query.sort.toUpperCase() : 'ASC';
-    let listaNomOrdenada = listaNom.slice(); // Copia la lista original para no modificarla
+    let listaNomOrdenada = listaNom;
+    if (count>30){
+        return res.status(400).send("El numero maximo es 30");
+    }
   
     // Validar el parámetro de ordenamiento
     if (sort !== 'ASC' && sort !== 'DESC') {
-      return res.status(400).send('El parámetro de ordenamiento debe ser "ASC" o "DESC".');
+      return res.status(400).send('El parámetro no es valido');
     }
   
     // Ordenar la lista de nombres
