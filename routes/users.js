@@ -40,29 +40,22 @@ const listaNom= [
 
 
 
-  router.get("/count", (req, res) => {
-    const count = parseInt(req.query.count) || listaNom.length;
-    const ordenar = req.query.sort ? req.query.sort.toUpperCase() : 'ASC';
-    
-    // Validar que el valor de ordenamiento sea 'ASC' o 'DESC', de lo contrario, devolver un error
-    if (ordenar !== 'ASC' && ordenar !== 'DESC') {
-      return res.status(400).send('El parámetro "sort" debe ser "ASC" o "DESC"');
+  router.get("/:count", (req,res) => {
+    const count=parseInt(req.params.count);
+    let sort = req.params.sort ? req.params.sort.toUpperCase() : 'ASC';
+    let listaNomOrdenada=listaNom
+    if (sort==="ASC"){
+        listaNomOrdenada.sort().reverse()
     }
-  
-    // Ordenar el arreglo por la primera letra del apellido
-    listaNom.sort((a, b) => {
-      if (ordenar === 'ASC') {
-        return a.localeCompare(b);
-      } else {
-        return b.localeCompare(a);
-      }
-    });
-  
-    // Obtener solo las primeras "count" entradas del arreglo
-    const arregloNombresApellidos = listaNom.slice(0, count);
-  
-    res.send(arregloNombresApellidos);
+    else if (sort==="DESC"){
+        listanombreOrdenada.reverse();
+    } else {
+        return res.status(400).send('No es valido ese parametro para ordenar.')
+    }
+
+    listanombreOrdenada=listanombreOrdenada.slice(0,count);
+
+    res.send(listanombreOrdenada);
   });
-  
   
   module.exports = router;
