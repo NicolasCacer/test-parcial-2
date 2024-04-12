@@ -45,6 +45,9 @@ const listaNom= [
     if (count>30){
         return res.status(400).send("El numero maximo es 30");
     }
+    if (count<0){
+        return res.status(400).send("El numero tiene que ser positivo");
+    }
   
     // Validar el parámetro de ordenamiento
     if (sort !== 'ASC' && sort !== 'DESC') {
