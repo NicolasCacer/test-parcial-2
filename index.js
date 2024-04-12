@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 app.use("/coin",coinRouter);
 
-app.use("/users",userRouter)
+app.use("/users",userRouter);
 
 
 
