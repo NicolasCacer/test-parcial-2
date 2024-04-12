@@ -35,24 +35,24 @@ const listaNom= [
   ];
 
   router.post("/", (req,res) =>{
-    const { nombre, apellido, correo } = req.body;
+    const { name, lastName, email } = req.body;
 
     // Validar que se proporcionen los parámetros obligatorios
-    if (!nombre || !apellido || !correo) {
+    if (!name || !lastName || !email) {
       return res.status(400).json({ error: "Faltan parámetros obligatorios: nombre, apellido, correo electrónico" });
     }
   
     // Establecer valores por defecto para ciudad y país si no se proporcionan
-    const ciudad = req.body.ciudad || "Bogotá";
-    const pais = req.body.pais || "Colombia";
+    const city = req.body.city || "Bogotá";
+    const country = req.body.country || "Colombia";
   
     // Crear objeto de usuario con los datos proporcionados
     const usuario = {
-      nombre,
-      apellido,
-      correo,
-      ciudad,
-      pais
+      name,
+      lastName,
+      email,
+      city,
+      country
     };
   
     // Retornar el objeto JSON con la información del usuario creado
