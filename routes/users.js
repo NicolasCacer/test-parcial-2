@@ -38,6 +38,44 @@ const listaNom= [
     "AZCONA, ANDRÉS"
   ];
 
+  router.post("/", (req,res) =>{
+    try{
+      const name=req.body.name;
+    const lastName=req.body.lastName;
+    const email=req.body.email;
+
+    // Validar que se proporcionen los parámetros obligatorios
+    if (!name || !lastName || !email) {
+      return res.status(400).json({ error: "Faltan parámetros obligatorios: nombre, apellido, correo electrónico" });
+    }
+  
+    // Establecer valores por defecto para ciudad y país si no se proporcionan
+    const city = req.body.city || "Bogotá";
+    const country = req.body.country || "Colombia";
+  
+    // Crear objeto de usuario con los datos proporcionados
+    const usuarioNuevo = {
+      name,
+      lastName,
+      email,
+      city,
+      country
+    };
+
+    users.push(usuarioNuevo)
+  
+    // Retornar el objeto JSON con la información del usuario creado
+    res.status(201).json(usuarioNuevo);
+
+    } catch (error) {
+      console.error(error)
+      res.status(500).send(error)
+    }
+    
+  });
+  
+
+
 
   router.get("/:count", (req, res) => {
     const count = parseInt(req.params.count) ||listaNom.length;
@@ -69,34 +107,6 @@ const listaNom= [
     res.send(listaNomOrdenada);
   });  
 
-  router.post("/", (req,res) =>{
-    const name=req.body.name;
-    const lastName=req.body.lastName;
-    const email=req.body.email;
 
-    // Validar que se proporcionen los parámetros obligatorios
-    if (!name || !lastName || !email) {
-      return res.status(400).json({ error: "Faltan parámetros obligatorios: nombre, apellido, correo electrónico" });
-    }
-  
-    // Establecer valores por defecto para ciudad y país si no se proporcionan
-    const city = req.body.city || "Bogotá";
-    const country = req.body.country || "Colombia";
-  
-    // Crear objeto de usuario con los datos proporcionados
-    const usuarioNuevo = {
-      name,
-      lastName,
-      email,
-      city,
-      country
-    };
-
-    users.push(usuarioNuevo)
-  
-    // Retornar el objeto JSON con la información del usuario creado
-    res.status(201).json(usuarioNuevo);
-  });
-  
   
   module.exports = router;
