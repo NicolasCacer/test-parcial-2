@@ -47,12 +47,12 @@ const listaNom= [
     if (sort==="ASC"){
         listaNomOrdenada.sort().reverse()
     }
-    else if (sort==="DESC"){
+    if (sort==="DESC"){
         listanombreOrdenada.reverse();
-    } else {
-        return res.status(400).send('No es valido ese parametro para ordenar.')
     }
-
+    if (sort!=="ASC" || sort!=="DESC"){
+        return res.status(400).send('No es valido ese parametro para ordenar.')
+    }      
     listanombreOrdenada=listanombreOrdenada.slice(0,count);
 
     res.send(listanombreOrdenada);
