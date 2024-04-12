@@ -53,16 +53,18 @@ const listaNom= [
     const country = req.body.country || "Colombia";
   
     // Crear objeto de usuario con los datos proporcionados
-    const usuario = {
+    const usuarioNuevo = {
       name,
       lastName,
       email,
       city,
       country
     };
+
+    users.push(usuarioNuevo)
   
     // Retornar el objeto JSON con la información del usuario creado
-    res.status(201).json(usuario);
+    res.status(201).json(usuarioNuevo);
   });
 
   router.get("/:count", (req, res) => {
