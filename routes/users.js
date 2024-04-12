@@ -34,7 +34,7 @@ const listaNom= [
     "AZCONA, ANDRÉS"
   ];
 
-  router.get("/", (req,res) =>{
+  router.posts("/", (req,res) =>{
     const { nombre, apellido, correo } = req.body;
 
     // Validar que se proporcionen los parámetros obligatorios
