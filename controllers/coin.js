@@ -1,5 +1,5 @@
 module.exports = {
     get:(req, res) => {
-        res.send("Hola Get mundo")
+        res.send("Get está sirviendo :D")
     }
 }
